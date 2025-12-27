@@ -24,7 +24,7 @@ import type { CounterDesign } from './CounterPDFGenerator';
 import { OrderManager } from './OrderManager';
 import type { CustomerInfo, OrderData } from './OrderManager';
 import AdminPortal from './AdminPortal';
-import ErrorBoundary from './ErrorBoundary';
+import AdminPortal from './AdminPortal';
 
 // Custom Dropdown Component for visual elements
 const CustomDropdown = ({ 
@@ -2693,6 +2693,7 @@ export default function App() {
   
   // Admin Portal state
   const [showAdminPortal, setShowAdminPortal] = useState(false);
+  const [loggedInExhibitor, setLoggedInExhibitor] = useState<Exhibitor | null>(null);
   
   // Collapsed state for live packlists - standardmässigt minimerade
   const [floatingPacklistCollapsed, setFloatingPacklistCollapsed] = useState(true);
@@ -11278,6 +11279,20 @@ Monterhyra Beställningssystem
             setCounterDesigns({ designs, printType });
             console.log('🖼️ Counter designs applicerade:', designs);
           }}
+        />
+      )}
+
+      {/* Exhibitor Login / Dashboard */}
+      {loggedInExhibitor === null && window.location.pathname.startsWith('/exhibitor') && (
+        <ExhibitorLogin 
+          token={window.location.pathname.split('/')[2]}
+          onLogin={(exhibitor) => setLoggedInExhibitor(exhibitor)}
+        />
+      )}
+      {loggedInExhibitor && (
+        <ExhibitorDashboard 
+          exhibitor={loggedInExhibitor}
+          onLogout={() => setLoggedInExhibitor(null)}
         />
       )}
 

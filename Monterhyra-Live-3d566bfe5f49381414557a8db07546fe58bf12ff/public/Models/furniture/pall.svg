@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pall - enkel sittmöbel -->
+  <!-- Sits -->
+  <ellipse cx="50" cy="35" rx="20" ry="8" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  <ellipse cx="50" cy="33" rx="20" ry="6" fill="#F8F8F8"/>
+  
+  <!-- Sitsens tjocklek/sida -->
+  <rect x="30" y="33" width="40" height="4" fill="#E8E8E8"/>
+  
+  <!-- Ben (4 ben) -->
+  <rect x="35" y="37" width="3" height="25" fill="#C0C0C0"/>
+  <rect x="62" y="37" width="3" height="25" fill="#C0C0C0"/>
+  <rect x="35" y="37" width="3" height="25" fill="#B0B0B0" transform="translate(0, 0)"/>
+  <rect x="62" y="37" width="3" height="25" fill="#B0B0B0" transform="translate(0, 0)"/>
+  
+  <!-- Benfötter -->
+  <ellipse cx="36.5" cy="62" rx="2" ry="1" fill="#A0A0A0"/>
+  <ellipse cx="63.5" cy="62" rx="2" ry="1" fill="#A0A0A0"/>
+  
+  <!-- Highlight på sits -->
+  <ellipse cx="45" cy="30" rx="8" ry="2" fill="#FFFFFF" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="50" y="75" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🪑 Pall</text>
+</svg>

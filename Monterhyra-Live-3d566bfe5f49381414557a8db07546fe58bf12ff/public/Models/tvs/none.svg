@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ingen TV - bara en genomstruken TV-symbol -->
+  <rect x="25" y="20" width="50" height="30" fill="none" stroke="#bdc3c7" stroke-width="2" stroke-dasharray="5,5" rx="3"/>
+  <!-- Genomstrykning -->
+  <line x1="20" y1="15" x2="80" y2="45" stroke="#e74c3c" stroke-width="3"/>
+  <!-- Text -->
+  <text x="50" y="55" text-anchor="middle" fill="#7f8c8d" font-family="Arial, sans-serif" font-size="10">Ingen TV</text>
+</svg>

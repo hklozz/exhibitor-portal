@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sidobord - litet bord -->
+  <!-- Bordsskiva -->
+  <ellipse cx="50" cy="30" rx="22" ry="8" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  <ellipse cx="50" cy="28" rx="22" ry="6" fill="#F8F8F8"/>
+  
+  <!-- Bordsskivans kant -->
+  <path d="M 28 30 Q 28 35 50 37 Q 72 35 72 30" fill="#E0E0E0"/>
+  
+  <!-- Ben (4 st) -->
+  <rect x="33" y="37" width="2.5" height="45" fill="#C0C0C0"/>
+  <rect x="64.5" y="37" width="2.5" height="45" fill="#C0C0C0"/>
+  <rect x="33" y="37" width="2.5" height="45" fill="#B0B0B0" transform="translate(0, 0)"/>
+  <rect x="64.5" y="37" width="2.5" height="45" fill="#B0B0B0" transform="translate(0, 0)"/>
+  
+  <!-- Hylla (optional) -->
+  <ellipse cx="50" cy="65" rx="18" ry="4" fill="#F0F0F0" stroke="#D3D3D3" stroke-width="0.5"/>
+  
+  <!-- Benfötter -->
+  <ellipse cx="34.2" cy="82" rx="2" ry="1" fill="#A0A0A0"/>
+  <ellipse cx="65.8" cy="82" rx="2" ry="1" fill="#A0A0A0"/>
+  
+  <!-- Highlight på bordsskiva -->
+  <ellipse cx="45" cy="25" rx="10" ry="3" fill="#FFFFFF" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="50" y="92" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🪑 Sidobord</text>
+</svg>

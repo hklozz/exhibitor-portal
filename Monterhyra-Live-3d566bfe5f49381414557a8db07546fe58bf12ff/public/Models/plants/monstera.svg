@@ -1,0 +1,30 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Monstera - stora fenestrade blad -->
+  <!-- Kruka -->
+  <ellipse cx="50" cy="105" rx="20" ry="9" fill="#8B4513"/>
+  <rect x="30" y="96" width="40" height="18" fill="#8B4513" rx="3"/>
+  
+  <!-- Stjälkar -->
+  <rect x="47" y="60" width="3" height="40" fill="#228B22"/>
+  <rect x="52" y="45" width="3" height="55" fill="#228B22"/>
+  <rect x="42" y="55" width="3" height="45" fill="#228B22"/>
+  
+  <!-- Monstera blad med hål -->
+  <!-- Stort blad -->
+  <path d="M35 40 Q25 25 35 15 Q50 10 65 20 Q70 35 60 50 Q45 55 35 40" fill="#228B22" stroke="#1B5E20" stroke-width="1"/>
+  <!-- Hål i bladet -->
+  <ellipse cx="45" cy="30" rx="4" ry="6" fill="white"/>
+  <ellipse cx="55" cy="35" rx="3" ry="4" fill="white"/>
+  
+  <!-- Mellanstort blad -->
+  <path d="M65 55 Q75 45 70 35 Q60 30 50 35 Q45 45 55 60 Q65 65 65 55" fill="#2E7D32" stroke="#1B5E20" stroke-width="1"/>
+  <!-- Hål -->
+  <ellipse cx="60" cy="45" rx="3" ry="4" fill="white"/>
+  
+  <!-- Mindre blad -->
+  <path d="M30 65 Q20 55 25 45 Q35 40 45 50 Q40 65 30 65" fill="#388E3C" stroke="#1B5E20" stroke-width="1"/>
+  <ellipse cx="35" cy="52" rx="2" ry="3" fill="white"/>
+  
+  <!-- Text -->
+  <text x="50" y="115" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🍃 Monstera</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3m disk - lång disk -->
+  <!-- Diskskiva -->
+  <rect x="10" y="16" width="80" height="24" fill="#34495e" stroke="#2c3e50" stroke-width="2" rx="3"/>
+  <!-- Diskframsida (ljusare) -->
+  <rect x="10" y="34" width="80" height="9" fill="#5d6d7e" stroke="#2c3e50" stroke-width="1"/>
+  <!-- Glans på toppen -->
+  <rect x="12" y="18" width="76" height="5" fill="#85929e" opacity="0.6"/>
+  <!-- Ben (fler för längre disk) -->
+  <rect x="15" y="43" width="4" height="10" fill="#2c3e50"/>
+  <rect x="48" y="43" width="4" height="10" fill="#2c3e50"/>
+  <rect x="81" y="43" width="4" height="10" fill="#2c3e50"/>
+  <!-- Text -->
+  <text x="50" y="30" text-anchor="middle" fill="#ecf0f1" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3m</text>
+</svg>

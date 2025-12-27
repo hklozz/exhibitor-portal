@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 2.5m disk - mellan medel och lång -->
+  <!-- Diskskiva -->
+  <rect x="15" y="17" width="70" height="23" fill="#34495e" stroke="#2c3e50" stroke-width="2" rx="2"/>
+  <!-- Diskframsida (ljusare) -->
+  <rect x="15" y="35" width="70" height="8" fill="#5d6d7e" stroke="#2c3e50" stroke-width="1"/>
+  <!-- Glans på toppen -->
+  <rect x="17" y="19" width="66" height="4" fill="#85929e" opacity="0.6"/>
+  <!-- Ben -->
+  <rect x="20" y="43" width="4" height="10" fill="#2c3e50"/>
+  <rect x="48" y="43" width="4" height="10" fill="#2c3e50"/>
+  <rect x="76" y="43" width="4" height="10" fill="#2c3e50"/>
+  <!-- Text -->
+  <text x="50" y="30" text-anchor="middle" fill="#ecf0f1" font-family="Arial, sans-serif" font-size="9" font-weight="bold">2,5m</text>
+</svg>

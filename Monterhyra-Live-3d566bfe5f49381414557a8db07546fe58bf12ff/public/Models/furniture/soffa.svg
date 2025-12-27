@@ -1,0 +1,38 @@
+<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+  <!-- Soffa - bred sittmöbel för flera personer -->
+  <!-- Bas/fot -->
+  <rect x="15" y="75" width="110" height="8" fill="#C0C0C0" rx="2"/>
+  
+  <!-- Huvudsits -->
+  <rect x="20" y="45" width="100" height="30" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1" rx="5"/>
+  <rect x="22" y="43" width="96" height="28" fill="#F8F8F8" rx="4"/>
+  
+  <!-- Ryggstöd -->
+  <rect x="20" y="25" width="100" height="25" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1" rx="8"/>
+  <rect x="22" y="23" width="96" height="23" fill="#F5F5F5" rx="6"/>
+  
+  <!-- Armstöd (vänster) -->
+  <rect x="10" y="35" width="15" height="30" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1" rx="3"/>
+  <rect x="12" y="33" width="11" height="28" fill="#F0F0F0" rx="2"/>
+  
+  <!-- Armstöd (höger) -->
+  <rect x="115" y="35" width="15" height="30" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1" rx="3"/>
+  <rect x="117" y="33" width="11" height="28" fill="#F0F0F0" rx="2"/>
+  
+  <!-- Kuddar/dekoration -->
+  <rect x="30" y="30" width="15" height="12" fill="#E8E8E8" stroke="#D0D0D0" stroke-width="0.5" rx="2"/>
+  <rect x="50" y="30" width="15" height="12" fill="#E8E8E8" stroke="#D0D0D0" stroke-width="0.5" rx="2"/>
+  <rect x="70" y="30" width="15" height="12" fill="#E8E8E8" stroke="#D0D0D0" stroke-width="0.5" rx="2"/>
+  <rect x="90" y="30" width="15" height="12" fill="#E8E8E8" stroke="#D0D0D0" stroke-width="0.5" rx="2"/>
+  
+  <!-- Ben -->
+  <rect x="25" y="75" width="4" height="8" fill="#A0A0A0"/>
+  <rect x="111" y="75" width="4" height="8" fill="#A0A0A0"/>
+  
+  <!-- Highlights -->
+  <rect x="25" y="40" width="90" height="3" fill="#FFFFFF" opacity="0.5" rx="1"/>
+  <rect x="25" y="20" width="90" height="3" fill="#FFFFFF" opacity="0.3" rx="1"/>
+  
+  <!-- Text -->
+  <text x="70" y="87" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🛋️ Soffa</text>
+</svg>

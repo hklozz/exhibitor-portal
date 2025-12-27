@@ -1,0 +1,26 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sansevieria - ormplantan med upprätta blad -->
+  <!-- Kruka -->
+  <ellipse cx="50" cy="105" rx="16" ry="7" fill="#8B4513"/>
+  <rect x="34" y="98" width="32" height="14" fill="#8B4513" rx="2"/>
+  
+  <!-- Upprätta blad -->
+  <rect x="42" y="30" width="6" height="70" fill="#228B22" rx="3"/>
+  <rect x="48" y="25" width="6" height="75" fill="#2E7D32" rx="3"/>
+  <rect x="54" y="35" width="6" height="65" fill="#388E3C" rx="3"/>
+  <rect x="36" y="40" width="5" height="60" fill="#1B5E20" rx="2"/>
+  <rect x="60" y="45" width="5" height="55" fill="#228B22" rx="2"/>
+  
+  <!-- Gula ränder på bladen -->
+  <rect x="43" y="30" width="1" height="70" fill="#FFD700"/>
+  <rect x="47" y="30" width="1" height="70" fill="#FFD700"/>
+  
+  <rect x="49" y="25" width="1" height="75" fill="#FFD700"/>
+  <rect x="53" y="25" width="1" height="75" fill="#FFD700"/>
+  
+  <rect x="55" y="35" width="1" height="65" fill="#FFD700"/>
+  <rect x="59" y="35" width="1" height="65" fill="#FFD700"/>
+  
+  <!-- Text -->
+  <text x="50" y="115" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🌱 Sansevieria</text>
+</svg>

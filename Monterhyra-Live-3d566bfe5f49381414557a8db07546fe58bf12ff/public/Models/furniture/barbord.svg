@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Barbord - högt runt bord -->
+  <!-- Bas/fot -->
+  <ellipse cx="50" cy="105" rx="15" ry="5" fill="#C0C0C0"/>
+  <rect x="47" y="40" width="6" height="65" fill="#C0C0C0"/>
+  
+  <!-- Fotring -->
+  <ellipse cx="50" cy="75" rx="10" ry="3" fill="#A9A9A9"/>
+  
+  <!-- Bordsskiva -->
+  <ellipse cx="50" cy="35" rx="20" ry="6" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="2"/>
+  <ellipse cx="50" cy="32" rx="20" ry="4" fill="#F8F8F8"/>
+  
+  <!-- Glans på bordsskivan -->
+  <ellipse cx="45" cy="30" rx="8" ry="2" fill="#FFFFFF" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="50" y="115" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🍸 Barbord</text>
+</svg>

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Production
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Vite
+.vite/
+
+# Build outputs
+*.log
+
+# Backup files
+*.bak
+*.backup
+*.restore
+
+# OS
+Thumbs.db

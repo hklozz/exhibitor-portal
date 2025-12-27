@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- U-formad vägg -->
+  <!-- Bakvägg -->
+  <rect x="20" y="20" width="60" height="15" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <!-- Vänster sidovägg -->
+  <rect x="20" y="20" width="15" height="30" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <!-- Höger sidovägg -->
+  <rect x="65" y="20" width="15" height="30" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <!-- Golv -->
+  <line x1="15" y1="55" x2="85" y2="55" stroke="#95a5a6" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="20" y1="50" x2="20" y2="55" stroke="#95a5a6" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="80" y1="50" x2="80" y2="55" stroke="#95a5a6" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- 4x4 kvadratiskt golv -->
+  <defs>
+    <pattern id="tiles4x4" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Kvadratiskt golv 4x4 -->
+  <rect x="20" y="15" width="60" height="60" fill="url(#tiles4x4)" stroke="#7f8c8d" stroke-width="2"/>
+  
+  <!-- Dimensionstext -->
+  <text x="50" y="45" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" font-weight="bold">4×4</text>
+  
+  <!-- Liten kvadrat ikon -->
+  <rect x="45" y="5" width="10" height="10" fill="none" stroke="#3498db" stroke-width="2"/>
+</svg>

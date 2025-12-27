@@ -1,0 +1,17 @@
+Cleanup plan:
+
+1. Remove all unreachable/duplicate JSX and broken code from App.tsx. Only keep the main React component, valid helpers, and necessary imports.
+2. Remove unused files from /src:
+   - App.css (if not used)
+   - index.css (if not used)
+   - vite-env.d.ts (if not used)
+   - assets/ (if not used)
+3. Remove unused files from /public:
+   - vite.svg (default Vite asset)
+   - README-bilder.txt (if not needed)
+   - Bakvägg.png, massbild.jpg (if not needed for the app)
+4. Keep only main.tsx, App.tsx, and files required for the app to run.
+5. Remove all unused types, constants, and helper functions from App.tsx.
+
+Next steps:
+- I will now delete unused files and further clean App.tsx.

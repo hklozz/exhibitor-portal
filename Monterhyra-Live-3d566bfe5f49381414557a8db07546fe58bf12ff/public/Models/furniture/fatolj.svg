@@ -1,0 +1,31 @@
+<svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fätölj - bekväm stol med armstöd -->
+  <!-- Bas/fot -->
+  <ellipse cx="60" cy="85" rx="18" ry="6" fill="#C0C0C0"/>
+  
+  <!-- Sits -->
+  <ellipse cx="60" cy="55" rx="25" ry="12" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  <ellipse cx="60" cy="53" rx="25" ry="10" fill="#F8F8F8"/>
+  
+  <!-- Ryggstöd -->
+  <path d="M 35 50 Q 35 25 60 20 Q 85 25 85 50 L 85 55 Q 85 65 75 65 L 45 65 Q 35 65 35 55 Z" 
+        fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  
+  <!-- Armstöd (vänster) -->
+  <ellipse cx="35" cy="50" rx="8" ry="4" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="31" y="50" width="8" height="10" fill="#E8E8E8"/>
+  
+  <!-- Armstöd (höger) -->
+  <ellipse cx="85" cy="50" rx="8" ry="4" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="1"/>
+  <rect x="81" y="50" width="8" height="10" fill="#E8E8E8"/>
+  
+  <!-- Stativ/ben -->
+  <rect x="57" y="67" width="6" height="18" fill="#C0C0C0"/>
+  
+  <!-- Highlights -->
+  <ellipse cx="55" cy="48" rx="12" ry="4" fill="#FFFFFF" opacity="0.4"/>
+  <path d="M 45 30 Q 55 25 65 30" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Text -->
+  <text x="60" y="95" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="8">🪑 Fätölj</text>
+</svg>

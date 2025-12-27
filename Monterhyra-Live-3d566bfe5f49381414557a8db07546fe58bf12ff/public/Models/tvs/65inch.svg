@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 65" TV - mycket stor -->
+  <rect x="12" y="8" width="76" height="44" fill="#2c3e50" stroke="#34495e" stroke-width="2" rx="3"/>
+  <!-- Skärm -->
+  <rect x="14" y="10" width="72" height="40" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <!-- Skärmglans -->
+  <rect x="16" y="12" width="30" height="18" fill="#5dade2" opacity="0.3"/>
+  <!-- Stativ -->
+  <rect x="47" y="52" width="6" height="4" fill="#2c3e50"/>
+  <rect x="32" y="56" width="36" height="3" fill="#2c3e50"/>
+  <!-- Storlek text -->
+  <text x="50" y="32" text-anchor="middle" fill="#ecf0f1" font-family="Arial, sans-serif" font-size="12" font-weight="bold">65"</text>
+</svg>

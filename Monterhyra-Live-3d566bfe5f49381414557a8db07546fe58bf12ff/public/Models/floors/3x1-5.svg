@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- 3x1.5 rektangulärt golv -->
+  <defs>
+    <pattern id="tiles3x15" x="0" y="0" width="6" height="12" patternUnits="userSpaceOnUse">
+      <rect width="6" height="12" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Rektangulärt golv 3x1.5 (brett och smalt) -->
+  <rect x="15" y="30" width="70" height="35" fill="url(#tiles3x15)" stroke="#7f8c8d" stroke-width="2"/>
+  
+  <!-- Dimensionstext -->
+  <text x="50" y="47" text-anchor="middle" fill="#2c3e50" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3×1.5</text>
+  
+  <!-- Liten rektangel ikon -->
+  <rect x="40" y="15" width="20" height="10" fill="none" stroke="#3498db" stroke-width="2"/>
+</svg>

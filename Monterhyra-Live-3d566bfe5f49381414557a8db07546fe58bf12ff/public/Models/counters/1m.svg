@@ -1,0 +1,14 @@
+<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 1m disk - kort disk -->
+  <!-- Diskskiva -->
+  <rect x="30" y="20" width="40" height="20" fill="#34495e" stroke="#2c3e50" stroke-width="2" rx="2"/>
+  <!-- Diskframsida (ljusare) -->
+  <rect x="30" y="35" width="40" height="8" fill="#5d6d7e" stroke="#2c3e50" stroke-width="1"/>
+  <!-- Glans på toppen -->
+  <rect x="32" y="22" width="36" height="4" fill="#85929e" opacity="0.6"/>
+  <!-- Ben -->
+  <rect x="35" y="43" width="4" height="10" fill="#2c3e50"/>
+  <rect x="61" y="43" width="4" height="10" fill="#2c3e50"/>
+  <!-- Text -->
+  <text x="50" y="32" text-anchor="middle" fill="#ecf0f1" font-family="Arial, sans-serif" font-size="8" font-weight="bold">1m</text>
+</svg>

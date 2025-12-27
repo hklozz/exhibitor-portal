@@ -23,8 +23,8 @@ import CounterPDFGenerator from './CounterPDFGenerator';
 import type { CounterDesign } from './CounterPDFGenerator';
 import { OrderManager } from './OrderManager';
 import type { CustomerInfo, OrderData } from './OrderManager';
-import AdminPortal from './AdminPortal';
-import AdminPortal from './AdminPortal';
+import CombinedAdminPortal from './CombinedAdminPortal';
+import CombinedAdminPortal from './CombinedAdminPortal';
 
 // Custom Dropdown Component for visual elements
 const CustomDropdown = ({ 
@@ -11310,7 +11310,7 @@ Monterhyra Beställningssystem
           overflowX: 'hidden',
           WebkitOverflowScrolling: 'touch'
         }}>
-          <AdminPortal />
+          <CombinedAdminPortal />
           <div style={{
             position: 'fixed',
             top: 20,

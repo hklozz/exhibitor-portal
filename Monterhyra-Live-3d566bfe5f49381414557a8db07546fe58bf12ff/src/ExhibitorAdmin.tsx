@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ExhibitorManager, Event, Exhibitor, MonterSize } from './ExhibitorManager';
+import { ExhibitorManager } from './ExhibitorManager';
+import type { Event, Exhibitor, MonterSize } from './ExhibitorManager';
 
 interface ExhibitorAdminProps {
   onClose?: () => void;

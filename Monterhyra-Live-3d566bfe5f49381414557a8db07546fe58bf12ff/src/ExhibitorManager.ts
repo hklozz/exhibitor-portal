@@ -34,11 +34,19 @@ export interface Event {
 }
 
 class ExhibitorManagerClass {
+  private static instance: ExhibitorManagerClass;
   private storageKey = 'exhibitor_portal_data';
   private data: { events: Event[] } = { events: [] };
 
   constructor() {
     this.loadFromStorage();
+  }
+
+  static getInstance(): ExhibitorManagerClass {
+    if (!ExhibitorManagerClass.instance) {
+      ExhibitorManagerClass.instance = new ExhibitorManagerClass();
+    }
+    return ExhibitorManagerClass.instance;
   }
 
   /**
@@ -251,3 +259,6 @@ class ExhibitorManagerClass {
 
 // Singleton
 export const ExhibitorManager = new ExhibitorManagerClass();
+
+// Also export the class for type checking
+export { ExhibitorManagerClass };

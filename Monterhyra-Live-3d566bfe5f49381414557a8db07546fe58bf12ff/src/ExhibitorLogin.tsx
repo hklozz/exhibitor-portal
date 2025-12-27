@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ExhibitorManager, Exhibitor } from './ExhibitorManager';
+import { ExhibitorManager } from './ExhibitorManager';
+import type { Exhibitor } from './ExhibitorManager';
 
 interface ExhibitorLoginProps {
   onLogin: (exhibitor: Exhibitor) => void;
@@ -23,7 +24,7 @@ const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initial
     setError('');
     
     try {
-      const manager = ExhibitorManager.getInstance();
+      const manager = ExhibitorManager;
       const exhibitor = manager.getExhibitorByToken(tokenToUse);
       
       if (exhibitor) {

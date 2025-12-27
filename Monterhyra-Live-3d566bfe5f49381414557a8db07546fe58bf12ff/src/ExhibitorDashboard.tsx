@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Exhibitor } from './ExhibitorManager';
+import type { Exhibitor } from './ExhibitorManager';
 
 interface ExhibitorDashboardProps {
   exhibitor: Exhibitor;

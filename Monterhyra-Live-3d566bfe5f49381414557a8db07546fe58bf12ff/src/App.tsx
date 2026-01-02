@@ -25,6 +25,14 @@ import { OrderManager } from './OrderManager';
 import type { CustomerInfo, OrderData } from './OrderManager';
 import CombinedAdminPortal from './CombinedAdminPortal';
 import ErrorBoundary from './ErrorBoundary';
+
+// Detect exhibitor mode from URL params
+// const urlParams = new URLSearchParams(window.location.search);
+// const exhibitorMode (unused)
+// // const exhibitorWidth = exhibitorMode ? parseFloat(urlParams.get('width') || '3') : null;
+// // const exhibitorDepth = exhibitorMode ? parseFloat(urlParams.get('depth') || '1.5') : null;
+// // const exhibitorHeight = exhibitorMode ? parseFloat(urlParams.get('height') || '2.5') : null;
+
 import ExhibitorLogin from './ExhibitorLogin';
 import ExhibitorDashboard from './ExhibitorDashboard';
 import type { Exhibitor } from './ExhibitorManager';
@@ -2696,6 +2704,55 @@ export default function App() {
   // Admin Portal state
   const [showAdminPortal, setShowAdminPortal] = useState(false);
   const [loggedInExhibitor, setLoggedInExhibitor] = useState<Exhibitor | null>(null);
+
+  // Check if this is an exhibitor invite link
+  const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  const inviteToken = params.get('invite');
+  const monterSize = params.get('monterSize') as 'small' | 'medium' | 'large' | null;
+  
+  // Get dimensions from URL if present
+  const width = params.get('width') ? parseFloat(params.get('width')!) : null;
+  const depth = params.get('depth') ? parseFloat(params.get('depth')!) : null;
+  const height = params.get('height') ? parseFloat(params.get('height')!) : null;
+  const monterDimensions = (width && depth && height) ? { width, depth, height } : null;
+  
+  // If there's an invite token, show ONLY the exhibitor login/dashboard
+  if (inviteToken) {
+    return (
+      loggedInExhibitor ? (
+        <ExhibitorDashboard 
+          exhibitor={loggedInExhibitor}
+          onLogout={() => setLoggedInExhibitor(null)}
+        />
+      ) : (
+        <ExhibitorLogin 
+          token={inviteToken}
+          monterSize={monterSize}
+          monterDimensions={monterDimensions}
+          onLogin={(exhibitor) => setLoggedInExhibitor(exhibitor)}
+        />
+      )
+    );
+  }
+  
+  // If there's an invite token, show ONLY the exhibitor login/dashboard
+  if (inviteToken) {
+    return (
+      loggedInExhibitor ? (
+        <ExhibitorDashboard 
+          exhibitor={loggedInExhibitor}
+          onLogout={() => setLoggedInExhibitor(null)}
+        />
+      ) : (
+        <ExhibitorLogin 
+          token={inviteToken}
+          monterSize={monterSize}
+          monterDimensions={monterDimensions}
+          onLogin={(exhibitor) => setLoggedInExhibitor(exhibitor)}
+        />
+      )
+    );
+  }
   
   // Collapsed state for live packlists - standardmässigt minimerade
   const [floatingPacklistCollapsed, setFloatingPacklistCollapsed] = useState(true);
@@ -11284,19 +11341,7 @@ Monterhyra Beställningssystem
         />
       )}
 
-      {/* Exhibitor Login / Dashboard */}
-      {loggedInExhibitor === null && window.location.pathname.startsWith('/exhibitor') && (
-        <ExhibitorLogin 
-          token={window.location.pathname.split('/')[2]}
-          onLogin={(exhibitor) => setLoggedInExhibitor(exhibitor)}
-        />
-      )}
-      {loggedInExhibitor && (
-        <ExhibitorDashboard 
-          exhibitor={loggedInExhibitor}
-          onLogout={() => setLoggedInExhibitor(null)}
-        />
-      )}
+      {/* Exhibitor Login / Dashboard - only shown if not an invite link */}
 
       {/* Admin Portal */}
       {showAdminPortal && (

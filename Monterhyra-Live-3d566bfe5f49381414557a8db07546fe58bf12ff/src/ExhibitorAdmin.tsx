@@ -55,19 +55,33 @@ export const ExhibitorAdmin: React.FC<ExhibitorAdminProps> = ({ onClose }) => {
       return;
     }
 
-    const monterSize: MonterSize = {
-      width: parseFloat(newExhibitorWidth),
-      depth: parseFloat(newExhibitorDepth),
-      height: parseFloat(newExhibitorHeight)
+    // Determine monterSize based on dimensions
+    const width = parseFloat(newExhibitorWidth);
+    const depth = parseFloat(newExhibitorDepth);
+    const height = parseFloat(newExhibitorHeight);
+    
+    let monterSize: MonterSize = 'medium';
+    if (width <= 2 && depth <= 2) {
+      monterSize = 'small';
+    } else if (width >= 4 || depth >= 4) {
+      monterSize = 'large';
+    }
+
+    const monterDimensions = {
+      width: width,
+      depth: depth,
+      height: height
     };
 
     ExhibitorManager.addExhibitor(
       selectedEvent.id,
-      newExhibitorCompany,
-      newExhibitorPerson,
+      newExhibitorPerson || newExhibitorCompany,
       newExhibitorEmail,
-      newExhibitorPhone,
-      monterSize
+      newExhibitorCompany,
+      monterSize,
+      monterDimensions,
+      newExhibitorPerson,
+      newExhibitorPhone
     );
 
     setEvents(ExhibitorManager.getEvents());
@@ -374,7 +388,7 @@ export const ExhibitorAdmin: React.FC<ExhibitorAdminProps> = ({ onClose }) => {
                               👤 {exhibitor.contactPerson || 'N/A'} | 📧 {exhibitor.email}
                             </p>
                             <p style={{ margin: '0', fontSize: '13px', color: '#666' }}>
-                              📏 {exhibitor.monterSize.width}m × {exhibitor.monterSize.depth}m × {exhibitor.monterSize.height}m
+                              📏 {exhibitor.monterDimensions.width}m × {exhibitor.monterDimensions.depth}m × {exhibitor.monterDimensions.height}m
                             </p>
                           </div>
                           <button

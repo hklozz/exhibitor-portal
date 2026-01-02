@@ -1,264 +1,227 @@
-/**
- * ExhibitorManager - Hanterar exhibitors/customers och deras monterdata
+/*
+ * Copyright © 2025 Klozz Holding AB. All rights reserved.
+ * MONTERHYRA™ - Proprietary and Confidential
+ * Unauthorized copying or distribution is strictly prohibited.
  */
 
-export interface MonterSize {
-  width: number;  // meter
-  depth: number;  // meter
-  height: number; // meter (vägg höjd)
+export type MonterSize = 'small' | 'medium' | 'large';
+
+export interface MonterDimensions {
+  width: number;   // i meter
+  depth: number;   // i meter
+  height: number;  // i meter
 }
 
 export interface Exhibitor {
   id: string;
-  eventId: string;
-  companyName: string;
-  contactPerson: string;
+  name: string;
   email: string;
-  phone: string;
+  companyName: string;
+  contactPerson?: string;
+  phone?: string;
   monterSize: MonterSize;
-  inviteToken: string; // Unik länk-token
-  orderData?: any; // Sparad monte-design
-  createdAt: string;
-  updatedAt: string;
+  monterDimensions: MonterDimensions; // actual width/depth/height
+  eventId: string;
+  token: string;
+  inviteLink: string;
+  createdAt: Date;
+  boothConfig?: {
+    furniture: string[];
+    decorations: string[];
+    customizations: Record<string, any>;
+  };
 }
 
 export interface Event {
   id: string;
   name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
+  location?: string;
   exhibitors: Exhibitor[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
 }
 
+// Default dimensions for each monterSize
+const DEFAULT_DIMENSIONS: Record<MonterSize, MonterDimensions> = {
+  small: { width: 2, depth: 2, height: 2.5 },
+  medium: { width: 3, depth: 3, height: 2.5 },
+  large: { width: 4, depth: 4, height: 2.5 }
+};
+
 class ExhibitorManagerClass {
-  private static instance: ExhibitorManagerClass;
-  private storageKey = 'exhibitor_portal_data';
-  private data: { events: Event[] } = { events: [] };
+  private events: Event[] = [];
+  private exhibitors: Exhibitor[] = [];
 
   constructor() {
-    this.loadFromStorage();
+    this.loadFromLocalStorage();
   }
 
-  static getInstance(): ExhibitorManagerClass {
-    if (!ExhibitorManagerClass.instance) {
-      ExhibitorManagerClass.instance = new ExhibitorManagerClass();
-    }
-    return ExhibitorManagerClass.instance;
-  }
-
-  /**
-   * Ladda data från localStorage
-   */
-  private loadFromStorage(): void {
+  private loadFromLocalStorage(): void {
     try {
-      const stored = localStorage.getItem(this.storageKey);
+      const stored = localStorage.getItem('exhibitor-portal-data');
       if (stored) {
-        this.data = JSON.parse(stored);
+        const data = JSON.parse(stored);
+        this.events = data.events || [];
+        this.exhibitors = data.exhibitors || [];
       }
     } catch (error) {
-      console.error('Fel vid laddning av exhibitor data:', error);
+      console.error('Failed to load data from localStorage:', error);
     }
   }
 
-  /**
-   * Spara data till localStorage
-   */
-  private saveToStorage(): void {
+  private saveToLocalStorage(): void {
     try {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.data));
+      localStorage.setItem('exhibitor-portal-data', JSON.stringify({
+        events: this.events,
+        exhibitors: this.exhibitors,
+      }));
     } catch (error) {
-      console.error('Fel vid sparning av exhibitor data:', error);
+      console.error('Failed to save data to localStorage:', error);
     }
   }
 
-  /**
-   * Skapa ny event
-   */
-  createEvent(name: string, description: string, startDate: string, endDate: string): Event {
+  // Event methods
+  createEvent(name: string, description?: string, startDate?: string, endDate?: string): Event {
     const event: Event = {
-      id: `event_${Date.now()}`,
+      id: `event-${Date.now()}`,
       name,
       description,
       startDate,
       endDate,
       exhibitors: [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      createdAt: new Date(),
     };
-    this.data.events.push(event);
-    this.saveToStorage();
+    this.events.push(event);
+    this.saveToLocalStorage();
     return event;
   }
 
-  /**
-   * Hämta alla events
-   */
   getEvents(): Event[] {
-    return this.data.events;
+    return this.events;
   }
 
-  /**
-   * Hämta event med ID
-   */
   getEvent(eventId: string): Event | undefined {
-    return this.data.events.find(e => e.id === eventId);
+    return this.events.find(e => e.id === eventId);
   }
 
-  /**
-   * Lägg till exhibitor till event
-   */
+  deleteEvent(eventId: string): void {
+    this.events = this.events.filter(e => e.id !== eventId);
+    this.exhibitors = this.exhibitors.filter(ex => ex.eventId !== eventId);
+    this.saveToLocalStorage();
+  }
+
+  // Exhibitor methods
   addExhibitor(
     eventId: string,
-    companyName: string,
-    contactPerson: string,
+    name: string,
     email: string,
-    phone: string,
-    monterSize: MonterSize
+    companyName: string,
+    monterSize: MonterSize,
+    monterDimensions?: MonterDimensions,
+    contactPerson?: string,
+    phone?: string
   ): Exhibitor {
-    const event = this.getEvent(eventId);
-    if (!event) throw new Error(`Event ${eventId} inte funnen`);
-
+    const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const dimensions = monterDimensions || DEFAULT_DIMENSIONS[monterSize];
+    
     const exhibitor: Exhibitor = {
-      id: `exhibitor_${Date.now()}`,
-      eventId,
+      id: `exhibitor-${Date.now()}`,
+      name,
+      email,
       companyName,
       contactPerson,
-      email,
       phone,
       monterSize,
-      inviteToken: this.generateToken(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      monterDimensions: dimensions,
+      eventId,
+      token,
+      inviteLink: `${typeof window !== 'undefined' ? window.location.origin : ''}/?invite=${token}&monterSize=${monterSize}&width=${dimensions.width}&depth=${dimensions.depth}&height=${dimensions.height}`,
+      createdAt: new Date(),
+      boothConfig: {
+        furniture: [],
+        decorations: [],
+        customizations: {},
+      },
     };
 
-    event.exhibitors.push(exhibitor);
-    this.saveToStorage();
-    return exhibitor;
-  }
+    this.exhibitors.push(exhibitor);
 
-  /**
-   * Hämta alla exhibitors för en event
-   */
-  getExhibitors(eventId: string): Exhibitor[] {
+    // Add exhibitor to event
     const event = this.getEvent(eventId);
-    return event ? event.exhibitors : [];
-  }
-
-  /**
-   * Hämta exhibitor med ID
-   */
-  getExhibitor(exhibitorId: string): Exhibitor | undefined {
-    for (const event of this.data.events) {
-      const exhibitor = event.exhibitors.find(e => e.id === exhibitorId);
-      if (exhibitor) return exhibitor;
+    if (event) {
+      event.exhibitors.push(exhibitor);
     }
-    return undefined;
-  }
 
-  /**
-   * Hämta exhibitor via invite-token
-   */
-  getExhibitorByToken(token: string): Exhibitor | undefined {
-    for (const event of this.data.events) {
-      const exhibitor = event.exhibitors.find(e => e.inviteToken === token);
-      if (exhibitor) return exhibitor;
-    }
-    return undefined;
-  }
-
-  /**
-   * Uppdatera exhibitor
-   */
-  updateExhibitor(exhibitorId: string, updates: Partial<Exhibitor>): Exhibitor {
-    const exhibitor = this.getExhibitor(exhibitorId);
-    if (!exhibitor) throw new Error(`Exhibitor ${exhibitorId} inte funnen`);
-
-    Object.assign(exhibitor, updates, { updatedAt: new Date().toISOString() });
-    this.saveToStorage();
+    this.saveToLocalStorage();
     return exhibitor;
   }
 
-  /**
-   * Spara monte-design för exhibitor
-   */
-  saveMonteDesign(exhibitorId: string, orderData: any): Exhibitor {
-    return this.updateExhibitor(exhibitorId, { orderData });
+  getExhibitors(eventId?: string): Exhibitor[] {
+    if (eventId) {
+      return this.exhibitors.filter(e => e.eventId === eventId);
+    }
+    return this.exhibitors;
   }
 
-  /**
-   * Radera exhibitor
-   */
-  deleteExhibitor(exhibitorId: string): boolean {
-    for (const event of this.data.events) {
-      const index = event.exhibitors.findIndex(e => e.id === exhibitorId);
-      if (index !== -1) {
-        event.exhibitors.splice(index, 1);
-        this.saveToStorage();
-        return true;
+  getExhibitor(exhibitorId: string): Exhibitor | undefined {
+    return this.exhibitors.find(e => e.id === exhibitorId);
+  }
+
+  getExhibitorByToken(token: string): Exhibitor | undefined {
+    return this.exhibitors.find(e => e.token === token);
+  }
+
+  deleteExhibitor(exhibitorId: string): void {
+    const exhibitor = this.getExhibitor(exhibitorId);
+    if (exhibitor) {
+      this.exhibitors = this.exhibitors.filter(e => e.id !== exhibitorId);
+      
+      // Remove from event
+      const event = this.getEvent(exhibitor.eventId);
+      if (event) {
+        event.exhibitors = event.exhibitors.filter(e => e.id !== exhibitorId);
       }
     }
-    return false;
+    this.saveToLocalStorage();
   }
 
-  /**
-   * Radera event
-   */
-  deleteEvent(eventId: string): boolean {
-    const index = this.data.events.findIndex(e => e.id === eventId);
-    if (index !== -1) {
-      this.data.events.splice(index, 1);
-      this.saveToStorage();
-      return true;
+  updateExhibitor(exhibitorId: string, updates: Partial<Exhibitor>): Exhibitor | undefined {
+    const exhibitor = this.getExhibitor(exhibitorId);
+    if (exhibitor) {
+      Object.assign(exhibitor, updates);
+      this.saveToLocalStorage();
+      return exhibitor;
     }
-    return false;
+    return undefined;
   }
 
-  /**
-   * Generera unik invite-token
-   */
-  private generateToken(): string {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  }
-
-  /**
-   * Generera invite-länk
-   */
   getInviteLink(exhibitor: Exhibitor): string {
-    const baseUrl = window.location.origin;
-    return `${baseUrl}/exhibitor/${exhibitor.inviteToken}`;
+    return exhibitor.inviteLink;
   }
 
-  /**
-   * Exportera exhibitor-data till JSON (för backup)
-   */
-  exportData(): string {
-    return JSON.stringify(this.data, null, 2);
-  }
-
-  /**
-   * Importera exhibitor-data från JSON
-   */
-  importData(jsonData: string): void {
-    try {
-      const imported = JSON.parse(jsonData);
-      if (imported.events && Array.isArray(imported.events)) {
-        this.data = imported;
-        this.saveToStorage();
-      } else {
-        throw new Error('Ogiltigt data-format');
-      }
-    } catch (error) {
-      console.error('Fel vid import:', error);
-      throw error;
+  // Booth configuration
+  saveBoothConfig(
+    exhibitorId: string,
+    config: {
+      furniture: string[];
+      decorations: string[];
+      customizations: Record<string, any>;
     }
+  ): void {
+    const exhibitor = this.getExhibitor(exhibitorId);
+    if (exhibitor) {
+      exhibitor.boothConfig = config;
+      this.saveToLocalStorage();
+    }
+  }
+
+  getBoothConfig(exhibitorId: string) {
+    const exhibitor = this.getExhibitor(exhibitorId);
+    return exhibitor?.boothConfig;
   }
 }
 
-// Singleton
+// Export singleton instance
 export const ExhibitorManager = new ExhibitorManagerClass();
-
-// Also export the class for type checking
-export { ExhibitorManagerClass };

@@ -89,13 +89,13 @@ const ExhibitorDashboard: React.FC<ExhibitorDashboardProps> = ({ exhibitor, onLo
             </h4>
             <div style={{ fontSize: '14px', lineHeight: '1.8' }}>
               <p style={{ margin: '8px 0' }}>
-                <strong>Bredd:</strong> {exhibitor.monterSize.width}m
+                <strong>Bredd:</strong> {exhibitor.monterDimensions.width}m
               </p>
               <p style={{ margin: '8px 0' }}>
-                <strong>Djup:</strong> {exhibitor.monterSize.depth}m
+                <strong>Djup:</strong> {exhibitor.monterDimensions.depth}m
               </p>
               <p style={{ margin: '8px 0' }}>
-                <strong>Höjd:</strong> {exhibitor.monterSize.height}m
+                <strong>Höjd:</strong> {exhibitor.monterDimensions.height}m
               </p>
             </div>
             <div style={{
@@ -188,32 +188,34 @@ const ExhibitorDashboard: React.FC<ExhibitorDashboardProps> = ({ exhibitor, onLo
           boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
         }}>
           {activeTab === 'design' && (
-            <div>
-              <h2 style={{ marginTop: 0, color: '#2c3e50' }}>🎨 Designa Din Monter</h2>
-              <p style={{ color: '#666', fontSize: '14px' }}>
-                Här kan du designa ditt mässbås med växter, möbler, väggdekorationer och mycket mer.
-              </p>
+            <div style={{ height: '100%', minHeight: 'calc(100vh - 300px)' }}>
+              <h2 style={{ marginTop: 0, marginBottom: '12px', color: '#2c3e50' }}>🎨 Designa Din Monter</h2>
               <div style={{
-                backgroundColor: '#f8f9fa',
-                padding: '40px',
-                borderRadius: '6px',
-                textAlign: 'center',
-                color: '#999',
-                minHeight: '400px',
+                backgroundColor: '#e8f4f8',
+                color: '#2c3e50',
+                padding: '8px 12px',
+                borderRadius: '4px',
+                marginBottom: '12px',
+                fontSize: '12px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                gap: '8px',
+                border: '1px solid #b3e5fc'
               }}>
-                <div>
-                  <p style={{ fontSize: '48px', margin: '0' }}>🏗️</p>
-                  <p style={{ fontSize: '16px', margin: '16px 0 0 0' }}>
-                    Designverktyget är under utveckling...
-                  </p>
-                  <p style={{ fontSize: '12px', color: '#bbb', margin: '8px 0 0 0' }}>
-                    Vi kommer snart att kunna använda det huvudsakliga designverktyget här
-                  </p>
-                </div>
+                🔒 Din montersize är låst: {exhibitor.monterDimensions.width}m × {exhibitor.monterDimensions.depth}m × {exhibitor.monterDimensions.height}m
               </div>
+              
+              <iframe
+                src={`/?exhibitor=${exhibitor.id}&width=${exhibitor.monterDimensions.width}&depth=${exhibitor.monterDimensions.depth}&height=${exhibitor.monterDimensions.height}&mode=exhibitor`}
+                style={{
+                  width: '100%',
+                  height: 'calc(100% - 40px)',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  display: 'block'
+                }}
+                title="Monterhyra Designer"
+              />
             </div>
           )}
 

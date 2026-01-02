@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ExhibitorManager } from './ExhibitorManager';
-import type { Exhibitor } from './ExhibitorManager';
+import type { Exhibitor, MonterSize } from './ExhibitorManager';
 
 interface ExhibitorLoginProps {
   onLogin: (exhibitor: Exhibitor) => void;
   token?: string;
+  monterSize?: MonterSize | null;
+  monterDimensions?: { width: number; depth: number; height: number } | null;
 }
 
-const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initialToken }) => {
+const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initialToken, monterSize, monterDimensions }) => {
   const [token, setToken] = useState(initialToken || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [foundExhibitor, setFoundExhibitor] = useState<Exhibitor | null>(null);
 
   useEffect(() => {
     if (initialToken) {
@@ -28,7 +29,16 @@ const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initial
       const exhibitor = manager.getExhibitorByToken(tokenToUse);
       
       if (exhibitor) {
-        setFoundExhibitor(exhibitor);
+        // Om monterSize kommer från URL och skiljer sig från sparad, uppdatera
+        if (monterSize && exhibitor.monterSize !== monterSize) {
+          exhibitor.monterSize = monterSize;
+          manager.updateExhibitor(exhibitor.id, { monterSize });
+        }
+        // Om monterDimensions kommer från URL, uppdatera
+        if (monterDimensions) {
+          exhibitor.monterDimensions = monterDimensions;
+          manager.updateExhibitor(exhibitor.id, { monterDimensions });
+        }
         onLogin(exhibitor);
       } else {
         setError('Ogiltig inbjudningslänk. Kontrollera länken och försök igen.');
@@ -48,49 +58,14 @@ const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initial
     }
   };
 
-  if (foundExhibitor) {
-    return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#f5f5f5',
-        padding: '20px'
-      }}>
-        <div style={{
-          backgroundColor: 'white',
-          padding: '40px',
-          borderRadius: '8px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          textAlign: 'center',
-          maxWidth: '500px'
-        }}>
-          <h2 style={{ color: '#2c3e50', marginBottom: '20px' }}>Välkommen! 🎉</h2>
-          <p style={{ color: '#666', marginBottom: '30px', fontSize: '16px' }}>
-            Du är inloggad som <strong>{foundExhibitor.companyName}</strong>
-          </p>
-          <div style={{
-            backgroundColor: '#f8f9fa',
-            padding: '20px',
-            borderRadius: '6px',
-            marginBottom: '30px',
-            textAlign: 'left'
-          }}>
-            <p><strong>Monterinfo:</strong></p>
-            <ul style={{ margin: '10px 0', paddingLeft: '20px' }}>
-              <li>Bredd: {foundExhibitor.monterSize.width}m</li>
-              <li>Djup: {foundExhibitor.monterSize.depth}m</li>
-              <li>Höjd: {foundExhibitor.monterSize.height}m</li>
-            </ul>
-          </div>
-          <p style={{ color: '#999', fontSize: '14px', marginBottom: '20px' }}>
-            Du kan nu börja designa din monter. Din montersize är låst för denna mässa.
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // Montersize-display
+  const monterSizeDisplay = {
+    small: { label: 'Liten', desc: '1-2 kvm', icon: '📦' },
+    medium: { label: 'Mellan', desc: '3-6 kvm', icon: '📦' },
+    large: { label: 'Stor', desc: '7+ kvm', icon: '📦' }
+  };
+
+  const sizeInfo = monterSize ? monterSizeDisplay[monterSize] : null;
 
   return (
     <div style={{
@@ -98,112 +73,103 @@ const ExhibitorLogin: React.FC<ExhibitorLoginProps> = ({ onLogin, token: initial
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
-      backgroundColor: '#f5f5f5',
-      padding: '20px'
+      backgroundColor: '#ffffff',
+      padding: '20px',
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif'
     }}>
       <div style={{
         backgroundColor: 'white',
         padding: '40px',
         borderRadius: '8px',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-        maxWidth: '500px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        maxWidth: '400px',
         width: '100%'
       }}>
-        <h1 style={{
-          fontSize: '28px',
-          color: '#2c3e50',
-          marginBottom: '10px',
-          textAlign: 'center'
-        }}>
-          Monterhyra Mässdesigner
-        </h1>
-        
-        <p style={{
-          color: '#666',
-          textAlign: 'center',
-          marginBottom: '30px',
-          fontSize: '14px'
-        }}>
-          Logga in med din inbjudningslänk för att designa din monter
-        </p>
+        {/* Montersize info box */}
+        {sizeInfo && (
+          <div style={{
+            backgroundColor: '#e8f4f8',
+            border: '2px solid #2196F3',
+            borderRadius: '8px',
+            padding: '20px',
+            marginBottom: '30px',
+            textAlign: 'center'
+          }}>
+            <p style={{ margin: '0 0 10px 0', color: '#1976d2', fontSize: '14px', fontWeight: '600' }}>
+              Din montersize
+            </p>
+            <p style={{ margin: '0', color: '#1565c0', fontSize: '24px', fontWeight: 'bold' }}>
+              {sizeInfo.label}
+            </p>
+            <p style={{ margin: '8px 0 0 0', color: '#666', fontSize: '13px' }}>
+              {sizeInfo.desc}
+            </p>
+          </div>
+        )}
 
+        {/* Login form */}
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '20px' }}>
             <label style={{
               display: 'block',
               marginBottom: '8px',
-              fontWeight: '500',
-              color: '#2c3e50'
+              color: '#333',
+              fontWeight: '600',
+              fontSize: '14px'
             }}>
               Inbjudningskod
             </label>
             <input
               type="text"
               value={token}
-              onChange={(e) => {
-                setToken(e.target.value);
-                setError('');
-              }}
-              placeholder="Klistra in din inbjudningskod här"
+              onChange={(e) => setToken(e.target.value)}
+              placeholder="Klistra in din kod"
               style={{
                 width: '100%',
                 padding: '12px',
                 border: '1px solid #ddd',
-                borderRadius: '4px',
+                borderRadius: '6px',
                 fontSize: '14px',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                fontFamily: 'inherit'
               }}
+              disabled={loading}
             />
           </div>
 
           {error && (
             <div style={{
-              backgroundColor: '#fee',
-              color: '#c33',
+              color: '#d32f2f',
+              backgroundColor: '#ffebee',
               padding: '12px',
-              borderRadius: '4px',
+              borderRadius: '6px',
               marginBottom: '20px',
-              fontSize: '14px',
-              border: '1px solid #fcc'
+              border: '1px solid #ef5350',
+              fontSize: '13px'
             }}>
-              ❌ {error}
+              ⚠️ {error}
             </div>
           )}
 
           <button
             type="submit"
-            disabled={loading || !token.trim()}
+            disabled={loading}
             style={{
               width: '100%',
               padding: '12px',
-              backgroundColor: loading ? '#ccc' : '#3498db',
+              backgroundColor: loading ? '#ccc' : '#2196F3',
               color: 'white',
               border: 'none',
-              borderRadius: '4px',
-              fontSize: '16px',
+              borderRadius: '6px',
+              fontSize: '14px',
               fontWeight: '600',
-              cursor: loading ? 'default' : 'pointer',
-              transition: 'background-color 0.3s'
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontFamily: 'inherit'
             }}
           >
             {loading ? 'Loggar in...' : 'Logga in'}
           </button>
         </form>
-
-        <div style={{
-          marginTop: '30px',
-          paddingTop: '20px',
-          borderTop: '1px solid #eee',
-          fontSize: '12px',
-          color: '#999',
-          textAlign: 'center'
-        }}>
-          <p>
-            Du bör ha mottagit en länk via email från mässarrangören.
-            <br />
-            Den länken innehåller din personliga inbjudningskod.
-          </p>
-        </div>
       </div>
     </div>
   );
